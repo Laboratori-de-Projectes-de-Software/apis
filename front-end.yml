@@ -1,0 +1,10 @@
+
+openapi: 3.0.4
+info:
+  title: Communication contract between application front-end and the corresponding back-end
+  description: This file defines the communication contract between the AI league application front-end and the corresponding back-end service.
+  version: 1.0.0
+
+paths:
+
+components:

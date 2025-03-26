@@ -1,0 +1,9 @@
+openapi: 3.0.4
+info:
+  title: Communication contract between application back-end and bot service
+  description: This file defines the communication contract between the AI league application back-end and the different bot services.
+  version: 1.0.0
+
+paths:
+
+components:
