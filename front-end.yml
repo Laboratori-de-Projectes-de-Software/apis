@@ -514,6 +514,10 @@ components:
           format: int64
         state:
           type: string
+          enum:
+            - PENDING
+            - IN_PROGRESS
+            - COMPLETED
         result:
           type: integer
         fighters:
