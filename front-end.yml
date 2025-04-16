@@ -542,6 +542,7 @@ components:
             - COMPLETED
         result:
           type: integer
+          description: Result of the match, -1 for draw, otherwise the winner's index in the fighters array.
         fighters:
           type: array
           items:
