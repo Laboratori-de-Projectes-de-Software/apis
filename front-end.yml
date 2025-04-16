@@ -414,6 +414,12 @@ components:
           type: string
         apiUrl:
           type: string
+        nWins:
+          type: integer
+        nDraws:
+          type: integer
+        nLosses:
+          type: integer
       required:
         - id
         - name
