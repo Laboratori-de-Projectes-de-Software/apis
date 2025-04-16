@@ -3,10 +3,16 @@ info:
   title: Communication contract between application front-end and the back-end service
   description: This file defines the communication contract between the AI league application front-end and the back-end service.
   version: 1.0.0
+servers:
+  - url: http://localhost:8080/{version}
+    variables:
+      version:
+        default: api/v0
+        description: API version prefix
 
 paths:
 
-  /api/v0/auth/register:
+  /auth/register:
     post:
       summary: Register a new user
       description: This endpoint allows a new user to register in the system.
@@ -26,7 +32,7 @@ paths:
         '409':
           description: Conflict, user already exists
 
-  /api/v0/auth/login:
+  /auth/login:
     post:
       summary: User login
       description: This endpoint allows a user to log in to the system.
@@ -46,7 +52,7 @@ paths:
         '401':
           description: Unauthorized, invalid credentials
 
-  /api/v0/bot:
+  /bot:
     post:
       summary: Create a new bot
       description: This endpoint allows a user to create a new bot.
@@ -86,7 +92,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/BotDTO'
 
-  /api/v0/bot/{botId}:
+  /bot/{botId}:
     get:
       summary: Get bot by ID
       description: This endpoint retrieves a bot by its ID.
@@ -134,7 +140,7 @@ paths:
         '404':
           description: Bot not found
 
-  /api/v0/league:
+  /league:
     post:
       summary: Create a new league
       description: This endpoint allows a user to create a new league.
@@ -172,7 +178,7 @@ paths:
                 items:
                   $ref: '#/components/schemas/LeagueDTO'
 
-  /api/v0/league/{leagueId}:
+  /league/{leagueId}:
     get:
       summary: Get league by ID
       description: This endpoint retrieves a league by its ID.
@@ -236,7 +242,7 @@ paths:
         '404':
           description: League not found
 
-  /api/v0/league/{leagueId}/bot:
+  /league/{leagueId}/bot:
     post:
       summary: Add bots to a league
       description: This endpoint allows a user to add bots to a league.
@@ -266,7 +272,7 @@ paths:
         '400':
           description: Bad request, invalid bot IDs
 
-  /api/v0/league/{leagueId}/leaderboard:
+  /league/{leagueId}/leaderboard:
     get:
       summary: Get league leaderboard
       description: This endpoint retrieves the leaderboard of a league.
@@ -290,7 +296,7 @@ paths:
         '404':
           description: League not found
 
-  /api/v0/league/{leagueId}/start:
+  /league/{leagueId}/start:
     post:
       summary: Start a league
       description: This endpoint starts a league.
@@ -308,7 +314,7 @@ paths:
         '404':
           description: League not found
 
-  /api/v0/league/{leagueId}/match:
+  /league/{leagueId}/match:
     get:
       summary: Get matches of a league
       description: This endpoint retrieves the matches of a league.
@@ -332,7 +338,7 @@ paths:
         '404':
           description: League not found
 
-  /api/v0/match/{matchId}/message:
+  /match/{matchId}/message:
     get:
       summary: Get match messages
       description: This endpoint retrieves the messages of a match.
