@@ -492,8 +492,7 @@ components:
         bots:
           type: array
           items:
-            type: integer
-            format: int64
+            $ref: '#/components/schemas/BotDTO'
         state:
           type: string
           enum:
@@ -553,8 +552,7 @@ components:
         fighters:
           type: array
           items:
-            type: integer
-            format: int64
+            $ref: '#/components/schemas/BotDTO'
         roundNumber:
           type: integer
       required:
