@@ -5,5 +5,33 @@ info:
   version: 1.0.0
 
 paths:
-
-components:
+  /api/message:
+    post:
+      summary: Send a message to the AI model
+      description: Sends a message to the AI model adapter and receives a response.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  description: The message to send to the AI model adapter.
+                context:
+                  type: string
+                  description: The context for the message, if applicable.
+              required:
+                - message
+      responses:
+        '200':
+          description: Successful response from the AI model adapter
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                    description: The response from the AI model adapter.
