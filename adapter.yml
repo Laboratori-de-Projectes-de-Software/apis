@@ -1,9 +1,101 @@
 openapi: 3.0.4
 info:
   title: Communication contract between application back-end and bot service
-  description: This file defines the communication contract between the AI league application back-end and the different bot services.
+  description: Defines the communication contract between the AI league application back-end and bot services (powered by ChatGPT or similar).
   version: 1.0.0
 
 paths:
+  /health/{botId}:
+    get:
+      summary: Check health of a bot service
+      description: Allows the application to know about a bot servers connection health
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The ID of the bot to retrieve connection health
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Bot service is healthy
+        '503':
+          description: Bot service is unavailable
+
+  /bot/message:
+    post:
+      summary: Send message from back to bot
+      description: This endpoint allows to end a message to a bot
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BotMessageDTO'
+      responses:
+        '200':
+          description: Message received successfully by bot
+
+  /bot/response/{botId}:
+    post:
+      summary: Get response from bot to back
+      description: This endpoint allows to receive a message from a bot
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The ID of the bot to retrieve connection health
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              description: Id of the match to retrieve the bot response
+              type: integer
+              format: int64
+      responses:
+        '200':
+          description: Response received successfully by back-end
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BotResponseDTO'
 
 components:
+  schemas:
+  
+    BotMessageDTO:
+      type: object
+      required:
+        - matchId
+        - botId
+        - message
+      properties:
+        matchId:
+          type: integer
+          format: int64
+        botId:
+          type: integer
+          format: int64
+        message:
+          type: string
+
+    BotResponseDTO:
+      type: object
+      required:
+        - matchId
+        - botId
+        - message
+      properties:
+        matchId:
+          type: integer
+          format: int64
+        botId:
+          type: integer
+          format: int64
+        message:
+          type: string
