@@ -2,8 +2,46 @@ openapi: 3.0.4
 info:
   title: Communication contract between application back-end and bot service
   description: This file defines the communication contract between the AI league application back-end and the different bot services.
-  version: 1.0.0
+  version: 1.0.1
 
 paths:
+  /message/{matchId}:
+    post:
+      summary: Send message to communicate with bots
+      description: This endpoint allows to send a message to a bot
+      parameters:
+        - name: matchId
+          in: path
+          required: true
+          description: The ID of the match to retrieve messages for
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MessageDTO'
+      responses:
+        '200':
+          description: Message received successfully by bot
 
 components:
+  schemas:
+
+    MessageDTO:
+      type: object
+      properties:
+        botId:
+          type: integer
+          format: int64
+        text:
+          type: string
+        time:
+          type: string
+          format: date-time
+      required:
+        - botId
+        - text
+        - time
