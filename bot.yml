@@ -1,0 +1,27 @@
+openapi: 3.0.4
+info:
+  title: Communication contract for bot service
+  description: This file defines the communication contract bot service.
+  version: 1.0.0
+
+paths:
+  /bot/health/{botId}:
+    get:
+      summary: Check health of a bot service
+      description: Allows to know about a bot service connection health
+      parameters:
+        - name: botId
+          in: path
+          required: true
+          description: The ID of the bot to retrieve connection health
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Bot service is healthy
+        '503':
+          description: Bot service is unavailable
+
+components:
+  schemas:
