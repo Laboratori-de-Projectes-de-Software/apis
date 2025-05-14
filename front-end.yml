@@ -478,13 +478,13 @@ components:
           type: string
         rounds:
           type: integer
-        matchTime:
+        matchMaxMessages:
           type: integer
           format: int64
       required:
         - name
         - rounds
-        - matchTime
+        - matchMaxMessages
 
     LeagueDTO:
       type: object
@@ -498,7 +498,7 @@ components:
           type: string
         rounds:
           type: integer
-        matchTime:
+        matchMaxMessages:
           type: integer
           format: int64
         bots:
@@ -515,7 +515,7 @@ components:
         - id
         - name
         - rounds
-        - matchTime
+        - matchMaxMessages
         - bots
         - state
 
