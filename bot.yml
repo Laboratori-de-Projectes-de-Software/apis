@@ -4,6 +4,13 @@ info:
   description: This file defines the communication contract bot service.
   version: 1.0.0
 
+servers:
+  - url: http://localhost:8080/{version}
+    variables:
+      version:
+        default: api/v0
+        description: API version prefix
+
 paths:
   /bot/health/{botId}:
     get:
