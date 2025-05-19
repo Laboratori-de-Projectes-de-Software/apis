@@ -362,6 +362,31 @@ paths:
         '404':
           description: Match not found
 
+  /match/{matchId}/start:
+    post:
+      summary: Start an on-demand match
+      description: This endpoint starts an on-demand match by its ID.
+      parameters:
+        - name: matchId
+          in: path
+          required: true
+          description: The ID of the match to start
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Match started successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MatchDTO'
+        '404':
+          description: Match not found
+        '400':
+          description: Match cannot be started (e.g. already started or completed)
+
+
 components:
   schemas:
 
@@ -478,13 +503,13 @@ components:
           type: string
         rounds:
           type: integer
-        matchTime:
+        matchMaxMessages:
           type: integer
           format: int64
       required:
         - name
         - rounds
-        - matchTime
+        - matchMaxMessages
 
     LeagueDTO:
       type: object
@@ -498,7 +523,7 @@ components:
           type: string
         rounds:
           type: integer
-        matchTime:
+        matchMaxMessages:
           type: integer
           format: int64
         bots:
@@ -515,7 +540,7 @@ components:
         - id
         - name
         - rounds
-        - matchTime
+        - matchMaxMessages
         - bots
         - state
 
