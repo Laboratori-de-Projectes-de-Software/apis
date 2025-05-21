@@ -2,7 +2,7 @@ openapi: 3.0.4
 info:
   title: Communication contract between application back-end and bot service
   description: This file defines the communication contract between the AI league application back-end and the different bot services.
-  version: 1.0.0
+  version: 1.0.1
 
 servers:
   - url: http://localhost:8080/{version}
@@ -12,33 +12,43 @@ servers:
         description: API version prefix
 
 paths:
-  /api/message:
+  /message/{matchId}:
     post:
-      summary: Send a message to the AI model
-      description: Sends a message to the AI model adapter and receives a response.
+      summary: Send message to communicate with bots
+      description: This endpoint allows to send a message to a bot
+      parameters:
+        - name: matchId
+          in: path
+          required: true
+          description: The ID of the match to retrieve messages for
+          schema:
+            type: integer
+            format: int64
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                message:
-                  type: string
-                  description: The message to send to the AI model adapter.
-                context:
-                  type: string
-                  description: The context for the message, if applicable.
-              required:
-                - message
+              $ref: '#/components/schemas/MessageDTO'
       responses:
         '200':
-          description: Successful response from the AI model adapter
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  response:
-                    type: string
-                    description: The response from the AI model adapter.
+          description: Message received successfully by bot
+
+components:
+  schemas:
+
+    MessageDTO:
+      type: object
+      properties:
+        botId:
+          type: integer
+          format: int64
+        text:
+          type: string
+        time:
+          type: string
+          format: date-time
+      required:
+        - botId
+        - text
+        - time
